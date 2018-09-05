@@ -260,7 +260,7 @@ class Player extends EventEmitter {
         const shard = this.client.channels.get(channel).guild.shard
         shard.send({
             op: 4,
-            shard: this.client.shard ? this.client.shard.id : 0,
+            shard: shard.id,
             d: {
                 guild_id: this.id,
                 channel_id: channel,
