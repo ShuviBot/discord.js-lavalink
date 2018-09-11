@@ -9,7 +9,7 @@ class Player extends EventEmitter {
     /**
 	 * @typedef {Object} PlayerOptions
 	 * @property {string} id Client user id
-	 * @property {external:Client} client Client
+	 * @property {Client} client Client
      * @property {PlayerManager} manager The player's manager
      * @property {LavalinkNode} node Lavalink node for the Player
      * @property {string} channel Channel id for the player
@@ -28,7 +28,7 @@ class Player extends EventEmitter {
         this.id = options.id;
         /**
          * Discord.js Client
-         * @type {external:Client}
+         * @type {Client}
          */
         Object.defineProperty(this, "client", { value: options.client });
         /**
@@ -257,7 +257,7 @@ class Player extends EventEmitter {
      * @private
      */
     updateVoiceState(channel, { selfmute = false, selfdeaf = false } = {}) {
-        const shard = this.client.guilds.get(this.id).shard
+        const { shard } = this.client.guilds.get(this.id);
         shard.send({
             op: 4,
             shard: shard.id,

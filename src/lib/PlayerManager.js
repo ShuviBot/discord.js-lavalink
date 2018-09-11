@@ -17,7 +17,7 @@ class PlayerManager extends Collection {
 
     /**
      * Constructs the PlayerManager
-     * @param {external:Client} client Discord.js Client
+     * @param {Client} client Discord.js Client
      * @param {Object[]} nodes Array of Lavalink Nodes
      * @param {PlayerManagerOptions} options PlayerManager Options
      */
@@ -27,13 +27,13 @@ class PlayerManager extends Collection {
 
         /**
          * The client of the PlayerManager
-         * @type {external:Client}
+         * @type {Client}
          * @private
          */
         Object.defineProperty(this, "client", { value: client });
         /**
          * Collection of LavaLink Nodes
-         * @type {external:Collection<string, LavalinkNode>}
+         * @type {Collection<string, LavalinkNode>}
          */
         this.nodes = new Collection();
         /**
@@ -130,7 +130,7 @@ class PlayerManager extends Collection {
      * });
      */
     join(data, { selfmute = false, selfdeaf = false } = {}) {
-        const shard = this.client.guilds.get(data.guild).shard
+        const { shard } = this.client.guilds.get(data.guild);
         const player = this.get(data.guild);
         if (player) return player;
         shard.send({
@@ -158,7 +158,7 @@ class PlayerManager extends Collection {
      * PlayerManager.leave("412180910587379712");
      */
     leave(guild) {
-        const shard = this.client.guilds.get(guild).shard
+        const { shard } = this.client.guilds.get(guild);
         shard.send({
             op: 4,
             d: {
